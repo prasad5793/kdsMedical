@@ -34,8 +34,13 @@ public class AdditionalServiceController implements AbstractController< Addition
         model.addAttribute("additionalServices", additionalServiceService.findAll());
         return "additionalService/additionalService";
     }
-@GetMapping("/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
+@GetMapping("/new")
+    public String addForm(Model model) {
+        return commonMethod(model, new AdditionalService(), true);
+    }
+
+    @GetMapping("/{id}")
+    public String view(@PathVariable Integer id, Model model) {
         model.addAttribute("additionalServiceDetail", additionalServiceService.findById(id));
         return "additionalService/additionalService-detail";
     }
@@ -58,7 +63,7 @@ public class AdditionalServiceController implements AbstractController< Addition
         if (!additionalServiceService.delete(id) ) {
             model.addAttribute("message", "Successfully deleted");
         } else {
-            model.addAttribute("message", "Successfully deleted");
+            model.addAttribute("message", "Not deleted");
         }
     return "redirect:/additionalService";
     }
