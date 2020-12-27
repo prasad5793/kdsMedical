@@ -1,8 +1,9 @@
 package lk.kdsMedical.asset.discountRatio.controller;
 
-import lk.suwasewana.asset.discountRatio.entity.DiscountRatio;
-import lk.suwasewana.asset.discountRatio.entity.Enum.DiscountRatioStatus;
-import lk.suwasewana.asset.discountRatio.service.DiscountRatioService;
+
+import lk.kdsMedical.asset.discountRatio.entity.DiscountRatio;
+import lk.kdsMedical.asset.discountRatio.entity.Enum.DiscountRatioStatus;
+import lk.kdsMedical.asset.discountRatio.service.DiscountRatioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
