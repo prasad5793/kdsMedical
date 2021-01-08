@@ -1,29 +1,24 @@
 package lk.kdsMedical.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.kdsMedical.asset.commonAsset.model.Enum.BloodGroup;
 import lk.kdsMedical.asset.commonAsset.model.Enum.CivilStatus;
 import lk.kdsMedical.asset.commonAsset.model.Enum.Gender;
+import lk.kdsMedical.asset.commonAsset.model.Enum.LiveDead;
 import lk.kdsMedical.asset.commonAsset.model.Enum.Title;
 import lk.kdsMedical.asset.commonAsset.model.FileInfo;
-import lk.kdsMedical.asset.employee.entity.Enum.Designation;
-import lk.kdsMedical.asset.employee.entity.Enum.EmployeeStatus;
-import lk.kdsMedical.asset.message.entity.EmailMessage;
+import lk.kdsMedical.asset.employee.entity.enums.Designation;
+import lk.kdsMedical.asset.employee.entity.enums.EmployeeStatus;
 import lk.kdsMedical.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -33,8 +28,8 @@ import java.util.List;
 @JsonFilter( "Employee" )
 public class Employee extends AuditEntity {
 
-    @Column( unique = true )
-    private String payRoleNumber;
+    @Column(unique = true)
+    private String code;
 
     @Size( min = 5, message = "Your name cannot be accepted" )
     private String name;
@@ -46,18 +41,14 @@ public class Employee extends AuditEntity {
     @Column( unique = true )
     private String nic;
 
-    @Column( unique = true )
-    private String departmentIdNumber;
-
     @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileOne;
 
+    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobileTwo;
 
+    @Size( max = 10, message = "Phone number length should be contained 10 and 9" )
     private String land;
-
-    @Column( unique = true )
-    private String email;
 
     @Column( unique = true )
     private String officeEmail;
@@ -72,9 +63,6 @@ public class Employee extends AuditEntity {
     private Gender gender;
 
     @Enumerated( EnumType.STRING )
-    private BloodGroup bloodGroup;
-
-    @Enumerated( EnumType.STRING )
     private Designation designation;
 
     @Enumerated( EnumType.STRING )
@@ -83,6 +71,9 @@ public class Employee extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private EmployeeStatus employeeStatus;
 
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
@@ -90,16 +81,10 @@ public class Employee extends AuditEntity {
     private LocalDate dateOfAssignment;
 
 
-    @ManyToMany( mappedBy = "employees" )
-    private List<EmailMessage> emailMessages;
+    @Transient
+    private MultipartFile file;
 
     @Transient
-    private List< MultipartFile > files = new ArrayList<>();
-
-    @Transient
-    private List< String > removeImages = new ArrayList<>();
-
-    @Transient
-    private List<FileInfo> fileInfos = new ArrayList<>();
+    private FileInfo fileInfo;
 
 }

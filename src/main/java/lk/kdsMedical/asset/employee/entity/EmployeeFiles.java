@@ -1,5 +1,6 @@
 package lk.kdsMedical.asset.employee.entity;
 
+
 import lk.kdsMedical.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

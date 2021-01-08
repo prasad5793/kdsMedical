@@ -12,6 +12,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.math.BigDecimal;
 
 
 @Entity
@@ -45,6 +47,9 @@ public class Doctor extends AuditEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @NotEmpty
+    private BigDecimal consultationFee;
 
     @ManyToOne
     private Consultation consultation;

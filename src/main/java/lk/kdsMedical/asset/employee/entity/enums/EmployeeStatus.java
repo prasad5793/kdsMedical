@@ -1,4 +1,4 @@
-package lk.kdsMedical.asset.employee.entity.Enum;
+package lk.kdsMedical.asset.employee.entity.enums;
 
 public enum EmployeeStatus {
     WORKING("Working"),
